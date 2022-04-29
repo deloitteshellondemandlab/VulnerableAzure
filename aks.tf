@@ -4,7 +4,7 @@ resource "azurerm_kubernetes_cluster" "vuln_k8_cluster" {
   name                = "${var.victim_company}-kubecluster"
   location            = azurerm_resource_group.victim-network-rg.location
   resource_group_name = azurerm_resource_group.victim-network-rg.name
-  dns_prefix          = "${var.victim_company}k-k8"
+  dns_prefix          = "${var.victim_company}-k8"
 
   default_node_pool {
     name       = "default"
@@ -42,6 +42,7 @@ provider "kubernetes" {
     client_certificate     = base64decode(azurerm_kubernetes_cluster.vuln_k8_cluster.kube_config.0.client_certificate)
     client_key             = base64decode(azurerm_kubernetes_cluster.vuln_k8_cluster.kube_config.0.client_key)
     cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.vuln_k8_cluster.kube_config.0.cluster_ca_certificate)
+  
 }
 
 
